@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
-	id="WebApp_ID" version="3.0">
-	
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>
-  
-  <!-- shiro拦截器 -->
   <filter>
     <filter-name>shiroFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -17,23 +11,17 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
-  
   <filter-mapping>
     <filter-name>shiroFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <!-- spring配置文件 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:/spring/applicationContext.xml</param-value>
   </context-param>
-  
-  <!-- 监听器 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -42,8 +30,6 @@
       <param-value>classpath:/spring/spring-web.xml</param-value>
     </init-param>
   </servlet>
-  
-  <!-- 阿里druid -->
   <servlet-mapping>
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
@@ -56,7 +42,6 @@
       <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
     </init-param>
   </filter>
-  
   <filter-mapping>
     <filter-name>DruidWebStatFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -69,8 +54,6 @@
     <servlet-name>DruidStatView</servlet-name>
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>
-  
-  <!-- 乱码配置 -->
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -80,13 +63,10 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
-  
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  <!-- 日志配置 -->
   <context-param>
     <param-name>log4jConfigLocation</param-name>
     <param-value>classpath:log4j.properties</param-value>
