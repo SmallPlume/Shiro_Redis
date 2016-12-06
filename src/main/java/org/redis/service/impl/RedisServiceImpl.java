@@ -60,6 +60,7 @@ public class RedisServiceImpl implements RedisService {
 	@Override
 	public void set(final byte[] key, final byte[] value, final long liveTime) {
 		log.debug("将数据插入redis的key的值===========【{}】",new String(key));
+		log.debug("将数据插入redis的value的值=========【{}】", new String(value));
 		redisTemplate.execute(new RedisCallback() {
 			public Long doInRedis(RedisConnection connection)
 					throws DataAccessException {

@@ -79,7 +79,7 @@
 	</bean>
 
 	<!-- 自定义的RolesFilter 修改权限如： role["admin","employee"]，表示要满足同时拥有两个角色， 相当于 
-		‘And’ 问题，将And关系改为Or，只要满足其中一个角色即可。 -->
+		‘And’ 问题，现在将And关系改为Or，只要满足其中一个角色即可。 -->
 	<bean id="anyRoles" class="org.shiro.web.filter.authz.RolesAuthorizationFilter" />
 
 	<!-- 自定义realm -->

@@ -75,15 +75,19 @@ public class RedisSessionDao extends CachingSessionDAO {
 	protected Session doReadSession(Serializable sessionId) {
 		logger.debug("=> Read session with ID [{}]",sessionId);
     	
-		String value = new String(template.get(SerializationUtils.sessionKey(keyPrefix, sessionId).getBytes()));
+		String key = SerializationUtils.sessionKey(keyPrefix, sessionId);
+		byte[] value = template.get(key.getBytes());
+		//String value = new String(valueByte);
 		
 		//例如 Redis 调用 flushdb 情况下所有的数据，读到的session就是空的
     	if(value != null){
-    		Session session = (Session) SerializationUtils.sessionIdFromString(value);
+    		Session session = (Session) SerializationUtils.sessionIdFromString(new String(value));
     		super.cache(session, session.getId());
             return session;
-    	} 
-    	return null;
+    	}else{
+    		return null;
+    	}
+    	
 	}
     
 	@Override

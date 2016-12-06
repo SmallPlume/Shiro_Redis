@@ -84,7 +84,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
  	
 	@Override
 	public V get(K key) throws CacheException {
-		logger.debug("根据key从Redis中获取对象 key [" + key + "]");
+		//logger.debug("根据key从Redis中获取对象 key [" + key + "]");
 		try {
 			if (key == null) {
 	            return null;

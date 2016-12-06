@@ -15,13 +15,13 @@ import org.shiro.web.servlet.MyShiroHttpServletResponse;
 import org.springframework.beans.factory.BeanInitializationException;
 
 /**
- * 去掉JESSIONID
+ * 去掉URL结尾的JESSIONID=xxx
  * @author Administrator
  *
  */
 public class MyShiroFilterFactoryBean extends ShiroFilterFactoryBean {
 
-private SecurityManager securityManager;
+	private SecurityManager securityManager;
 	
 	public SecurityManager getSecurityManager() {
 		return securityManager;
