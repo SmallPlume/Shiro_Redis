@@ -1,6 +1,9 @@
 package org.shiro.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
@@ -87,7 +90,6 @@ public class RedisSessionDao extends CachingSessionDAO {
     	}else{
     		return null;
     	}
-    	
 	}
     
 	@Override
@@ -108,6 +110,21 @@ public class RedisSessionDao extends CachingSessionDAO {
 	protected void doDelete(Session session) {
 		logger.debug("=> Delete session with ID [{}]", session.getId());
 		template.del(SerializationUtils.sessionKey(keyPrefix, session));
+	}
+	
+	@Override
+	public Collection<Session> getActiveSessions() {
+		Set<Session> sessions = new HashSet<Session>();
+		Set<byte[]> keys = template.keys(this.keyPrefix+"*");
+		if(keys != null && keys.size()>0){
+			for(byte[] key : keys){
+				String s = new String(template.get(key));
+				Session ss = SerializationUtils.sessionToString(s);
+				sessions.add(ss);
+			}
+		}
+		
+		return sessions;
 	}
 
 	public String getKeyPrefix() {

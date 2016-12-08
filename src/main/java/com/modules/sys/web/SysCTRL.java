@@ -38,6 +38,8 @@ public class SysCTRL {
 
 	@Autowired
 	private UserService service;
+	
+	public static final String FileDir = "uploadfile\\";
 
 	/**
 	 * 首页
@@ -175,8 +177,6 @@ public class SysCTRL {
 		return "upload";
 	}
 	
-	public static final String FileDir = "uploadfile\\";
-
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Result uload(HttpServletRequest request, Plupload plupload) throws IOException {
 		//文件存储路径
